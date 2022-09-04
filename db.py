@@ -12,22 +12,13 @@ def create_connection(db_file):
     return conn
 
 
-def select_state_by_token(conn, token):
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM GAME_STATE WHERE token=?", (token,))
-
-    rows = cur.fetchall()
-
-    for row in rows:
-        print(row)
-
-
-def new_game_token(conn):
+def new_game_token():
     guid_token = str(uuid.uuid4())
 
+    conn = create_connection("scripts/game_state.db")
     cur = conn.cursor()
     cur.execute("INSERT INTO GAME_STATE(token) VALUES(?)", (guid_token,))
-
     conn.commit()
+    conn.close()
 
     return guid_token
