@@ -1,4 +1,3 @@
-from dataclasses import field
 import sqlite3
 import uuid
 
@@ -67,3 +66,43 @@ def get_consequence_by(token):
     retrieve Consequence enum index from database
     """
     return _get_value_by(token, "consequence")
+
+
+def get_score_by(token):
+    return _get_value_by(token, "score")
+
+
+def increment_score(token, val):
+    conn = _create_connection()
+    cur = conn.cursor()
+
+    sql = """
+        UPDATE GAME_STATE 
+        SET score = score + ? 
+        ,update_datetime = CURRENT_TIMESTAMP 
+        WHERE token = ?"""
+    vars = (
+        val,
+        token,
+    )
+    cur.execute(sql, vars)
+    conn.commit()
+    conn.close()
+
+
+def update_game(token, consequence):
+    conn = _create_connection()
+    cur = conn.cursor()
+
+    sql = """
+        UPDATE GAME_STATE
+        SET status = status + 1
+        , consequence = ?
+        , update_datetime = CURRENT_TIMESTAMP
+        WHERE token = ?
+    """
+
+    vars = (consequence, token)
+    cur.execute(sql, vars)
+    conn.commit()
+    conn.close()

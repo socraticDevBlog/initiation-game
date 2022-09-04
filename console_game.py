@@ -1,7 +1,3 @@
-from state_model import State_model
-from game_constants import Consequence, Status
-
-
 title = """
    _        _  __   _        __   _                 
   (_)___   (_)/ /_ (_)___ _ / /_ (_)___   ___       
@@ -13,6 +9,9 @@ title = """
 /___/                                               
                     
 """
+
+from state_model import State_model
+from game_constants import Consequence, Status
 
 
 def entry_point():
@@ -29,12 +28,18 @@ def entry_point():
     handler(game_state)
 
 
+from logic import turn
+
+
 def handler(state):
-    print("handler function here")
-    print("This proves fetching Game status from database works:")
-    print(Status(state.get_status()))
-    print("This proves fetching Game consequence from database workds")
-    print(Consequence(state.get_consequence()))
+    turn(state)
+
+    r = input("")
+
+    if state.is_game_over():
+        return
+    else:
+        turn(state)
 
 
 def main():
