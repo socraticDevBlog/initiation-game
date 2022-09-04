@@ -1,3 +1,7 @@
+from state_model import State_model
+from game_constants import Consequence, Status
+
+
 title = """
    _        _  __   _        __   _                 
   (_)___   (_)/ /_ (_)___ _ / /_ (_)___   ___       
@@ -10,42 +14,36 @@ title = """
                     
 """
 
-import db
-
 
 def entry_point():
     print("enter your game token to resume a game")
     print("for a new game, just press Return")
-    r = input("")
+    token = input("")
 
-    if r != "":
-        handler(r)
-    else:
-        token = new_game()
-        print("The game is getting activated.")
-        print(f"Always keep this token handy. Copy it to your clipboard: \n")
-        print(token)
-        handler(token)
-
-
-def handler(token):
+    game_state = State_model(token)
+    print("The game is getting activated.")
+    print(f"Always keep this token handy. Copy it to your clipboard: \n")
+    print(game_state.token)
     print("\n")
     print("GAME IS BEGINNING NOW!!")
+    handler(game_state)
 
 
-def new_game():
-    print("omg! you want to play a new game of the initiation_game 2022!")
-    print("Hope you will enjoy the experience")
-    return db.new_game_token()
+def handler(state):
+    print("handler function here")
+    print("This proves fetching Game status from database works:")
+    print(Status(state.get_status()))
+    print("This proves fetching Game consequence from database workds")
+    print(Consequence(state.get_consequence()))
 
 
 def main():
     print(title)
     r = input("Want to play Initiation_game?: y/n \n")
 
-    if r == "y":
+    if r.lower() == "y":
         entry_point()
-    elif r == "n":
+    elif r.lower() == "n":
         print("see you later!!")
     else:
         print("invalid input. Enter letter 'y' to start a new game. Bye!")
