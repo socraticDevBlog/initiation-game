@@ -22,13 +22,15 @@ def entry_point():
         handler(r)
     else:
         token = new_game()
+        print("The game is getting activated.")
+        print(f"Always keep this token handy. Copy it to your clipboard: \n")
+        print(token)
         handler(token)
 
 
 def handler(token):
-    print("The game is getting activated.")
-    print(f"Always keep this token handy. Copy it to your clipboard: \n")
-    print(token)
+    print("\n")
+    print("GAME IS BEGINNING NOW!!")
 
 
 def new_game():
