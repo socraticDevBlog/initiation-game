@@ -20,3 +20,9 @@ cd scripts
 python game_state.py
 ```
 expect a new file named `game_state.db` to appear in the directory
+
+### play the console version in your terminal
+```
+cd ..
+python console_game.py
+``
