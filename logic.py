@@ -3,15 +3,11 @@ import random
 
 
 def turn(state):
-    consequences = Demo["consequences"]
-    consequence = consequences[state.get_consequence()]
-    print(random.choice(consequence))
-
     statuses = Demo["status"]
     current_statuses = statuses[state.get_status()]
     texts = current_statuses["text"]
     print(random.choice(texts))
-
+    print("")
     print("Make a choice and press Return")
     options = current_statuses["options"]
 

@@ -10,51 +10,56 @@ title = """
                     
 """
 
+game_over = """
+                                                         
+   _________    _____   ____     _______  __ ___________ 
+  / ___\__  \  /     \_/ __ \   /  _ \  \/ // __ \_  __ >
+ / /_/  > __ \|  Y Y  \  ___/  (  <_> )   /\  ___/|  | \/
+ \___  (____  /__|_|  /\___  >  \____/ \_/  \___  >__|   
+/_____/     \/      \/     \/                   \/       
+
+
+"""
+
 from state_model import State_model
 from game_constants import Consequence, Status
-
-
-def entry_point():
-    print("enter your game token to resume a game")
-    print("for a new game, just press Return")
-    token = input("")
-
-    game_state = State_model(token)
-    print("The game is getting activated.")
-    print(f"Always keep this token handy. Copy it to your clipboard: \n")
-    print(game_state.token)
-    print("\n")
-    print("GAME IS BEGINNING NOW!!")
-    handler(game_state)
-
-
 from logic import turn
+import os, argparse
 
 
-def handler(state):
-    turn(state)
-
-    r = input("")
-
-    if state.is_game_over():
-        return
-    else:
-        turn(state)
+def clear():
+    """
+    Clears the terminal screen and scroll back to present
+    the user with a nice clean, new screen. Useful for managing
+    menu screens in terminal applications.
+    """
+    os.system("cls" if os.name == "nt" else "echo -e \\\\033c")
 
 
-def main():
+def main(token):
     print(title)
-    r = input("Want to play Initiation_game?: y/n \n")
 
-    if r.lower() == "y":
-        entry_point()
-    elif r.lower() == "n":
-        print("see you later!!")
-    else:
-        print("invalid input. Enter letter 'y' to start a new game. Bye!")
+    state = State_model(token)
+
+    while True:
+        clear()
+        if state.is_game_over():
+            print(game_over)
+            break
+
+        turn(state)
+        _ = input("")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--token",
+        type=str,
+        help="An optional existing game token can be given to resume an existing game",
+    )
+    args = parser.parse_args()
+    token = args.token if args.token != None else ""
+    main(token)
 else:
     print("not main...")

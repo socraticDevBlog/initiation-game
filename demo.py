@@ -42,15 +42,16 @@ Demo = {
                 "1- You ask that stranger help to take over the rescue process",
                 "2- You keep on trying to rescue the woman on your own. You want to be the hero of the day.",
             ],
+            "consequences": [1, 2],
         },
         5: {
             "text": [
-                "The stranger has knife. He proceeds to stab the drowning victim. Then stabs you in the heart.",
-                "The stranger takes out a machine gun and shoots you and the victim multiple times.",
+                "1- The stranger has knife. He proceeds to stab the drowning victim. Then stabs you in the heart.",
+                "2- The stranger takes out a machine gun and shoots you and the victim multiple times.",
             ],
             "options": [
-                "You die in silence",
-                "You die while screaming IT'S NOT FEAR!!!",
+                "1- You die in silence",
+                "2- You die while screaming IT'S NOT FEAR!!!",
             ],
             "consequences": [3],
         },

@@ -26,6 +26,5 @@ class State_model:
 
     def is_game_over(self):
         status = db.get_status_by(self.token)
-        print(status)
 
-        return status == Status.CATASTROPHE
+        return status > Status.CATASTROPHE.value
