@@ -3,6 +3,12 @@ import random
 
 
 def turn_infos(state):
+    """
+    returns all the text necessary for a turn
+
+    @parameter: state - state model object of the current game. contains all
+    current state informations
+    """
     ret = {}
 
     statuses = Demo["status"]
@@ -18,6 +24,13 @@ def turn_infos(state):
 
 
 def console_turn(state):
+    """
+    procedures that prints a turn's text when game is played in console-mode
+
+    @parameter: state - state model object of the current game. contains all
+    current state informations
+    """
+
     turn_obj = turn_infos(state)
 
     print(turn_obj["status"])

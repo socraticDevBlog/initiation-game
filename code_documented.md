@@ -376,7 +376,10 @@ An enumeration.
 >     )
 
 
+procedures that prints a turn's text when game is played in console-mode
 
+@parameter: state - state model object of the current game. contains all
+current state informations
 
     
 ### Function `turn_infos` {#id}
@@ -389,7 +392,10 @@ An enumeration.
 >     )
 
 
+returns all the text necessary for a turn
 
+@parameter: state - state model object of the current game. contains all
+current state informations
 
 
 
