@@ -25,4 +25,25 @@ expect a new file named `game_state.db` to appear in the directory
 ```
 cd ..
 python console_game.py
-``
+```
+
+## keeping code well-documented
+
+liberal use of docstrings is encouraged
+we chose to use [https://pdoc3.github.io/pdoc/](https://pdoc3.github.io/pdoc/) to document our codebase.
+
+
+### install pdoc3
+
+```
+python3 -m venv env
+source env/bin/activate
+pip3 install pdoc3
+```
+
+### generate fresh documentation
+
+*at project's root
+```
+pdoc --pdf . |> code_documented.md
+```

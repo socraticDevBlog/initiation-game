@@ -37,6 +37,14 @@ def clear():
 
 
 def main(token):
+    """
+    entry point to the game.
+
+    contains game loop
+
+    @param: token - user can provide a token referencing an existing game. this
+    token is a unique identifier used to fetch a specifc game record from database.
+    """
     print(title)
 
     state = State_model(token)
