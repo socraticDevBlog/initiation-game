@@ -23,8 +23,8 @@ game_over = """
 
 from state_model import State_model
 from game_constants import Consequence, Status
-from logic import turn
-import os, argparse
+from logic import console_turn
+import os, argparse, time
 
 
 def clear():
@@ -47,8 +47,20 @@ def main(token):
             print(game_over)
             break
 
-        turn(state)
-        _ = input("")
+        console_turn(state)
+
+        ans = 0
+        while not ans:
+            try:
+                ans = int(input(""))
+                if ans not in (1, 2):
+                    raise ValueError
+            except ValueError:
+                ans = 0
+                print("That's not an option!")
+
+        print(f"you picked number {ans}")
+        time.sleep(2)
 
 
 if __name__ == "__main__":
