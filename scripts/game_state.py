@@ -4,7 +4,7 @@ connection_obj = sqlite3.connect("game_state.db")
 
 cursor_obj = connection_obj.cursor()
 
-gamestate_table = """ CREATE TABLE GAME_STATE (
+gamestate_table = """ CREATE TABLE if not exists GAME_STATE (
             id INTEGER PRIMARY KEY,
             token VARCHAR(255) NOT NULL UNIQUE,
             score INT DEFAULT 0,
