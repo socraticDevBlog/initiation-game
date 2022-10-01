@@ -2,17 +2,29 @@ from demo import Demo
 import random
 
 
-def turn(state):
+def turn_infos(state):
+    ret = {}
+
     statuses = Demo["status"]
     current_statuses = statuses[state.get_status()]
+
     texts = current_statuses["text"]
-    print(random.choice(texts))
+    ret.update({"status": random.choice(texts)})
+
+    ret.update({"options": current_statuses["options"]})
+    ret.update({"consequences": random.choice(current_statuses["consequences"])})
+
+    return ret
+
+
+def console_turn(state):
+    turn_obj = turn_infos(state)
+
+    print(turn_obj["status"])
     print("")
     print("Make a choice and press Return")
-    options = current_statuses["options"]
 
-    for x in options:
+    for x in turn_obj["options"]:
         print(x)
 
-    consequences = current_statuses["consequences"]
-    state.update_game(random.choice(consequences))
+    state.update_game(turn_obj["consequences"])
